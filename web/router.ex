@@ -19,6 +19,14 @@ defmodule Trollo.Router do
     get "*path", PageController, :index
   end
 
+  scope "/api", Trollo do
+    pipe_through :api
+
+    scope "/v1" do
+      post "/registrations", RegistrationController, :create
+    end
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", Trollo do
   #   pipe_through :api

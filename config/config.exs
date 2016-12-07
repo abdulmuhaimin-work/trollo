@@ -22,6 +22,13 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
+config :guardian, Guardian,
+  issuer: "Trollo",
+  ttl: { 3, :days },
+  verify_issuer: true,
+  secret_key: "2drl7b0XQugdDOlmmi6r/gQCv03ipYopjKRWt7JGoxSAfh1MGqyu40srUfs4nVA1",
+  serializer: Trollo.GuardianSerializer
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"
