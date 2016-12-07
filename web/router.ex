@@ -11,6 +11,9 @@ defmodule Trollo.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
+
+    plug Guardian.Plug.VerifyHeader
+    plug Guardian.Plug.LoadResource
   end
 
   scope "/", Trollo do
@@ -24,6 +27,9 @@ defmodule Trollo.Router do
 
     scope "/v1" do
       post "/registrations", RegistrationController, :create
+      post "/sessions", SessionsController, :create
+      delete "/sessions", SessionsController, :delete
+      get "/current_user", CurrentUserController, :show
     end
   end
 
